@@ -76,38 +76,22 @@ for ($row = 2; $row <=$highestRow ;$row++){
    $res=mysqli_query($con,$query) ;
   echo json_encode(mysqli_error($con));
 }
-   //echo $query_parts;
-      //  $query_parts = " ('" . $mastersku . "', '" . $category . "', '" .$name "', '" .$sp "', '" .$color  "')";
+else if(strcmp($status,"update")==0){
+$query="update products set mastersku='$mastersku',primary_category='$primary_category',category='$category',name='$name',cp='$cp',mrp='$mrp',sp='$sp',material='$material',color='$color',images='$images',size='$size',access_role='$access_role',specific_access='$specific_access',inventory='$inventory',inventory_type='$inventory_type',last_access_time='$last_access_time',last_access_by='$last_access_by',updated_by='$updated_by',updated_ts='$updated_ts',created_by='$created_by',created_ts='$created_ts' where sku='$sku'";
+   
+    $res=mysqli_query($con,$query) ;
+  echo json_encode(mysqli_error($con));
+}
         
     
 
-/*$query="insert into products (mastersku,category,name,sp,color) values('$mastersku','$category','$name','$sp','$color')";
 
-            mysqli_query($con,$query);*/
-            // or die(echo mysql_error());
-
-            //echo '<br/><br/>----------------Break-------------------<br/><br/>';
         }   
         }
 
-/*
 
-$query = 'INSERT INTO TABLE (`column1`, `column2`) VALUES ';
-    $query_parts = array();
-    for($x=0; $x<count($column1); $x++){
-        $query_parts[] = "('" . $column1[$x] . "', '" . $column2[$x] . "')";
-    }
-    echo $query .= implode(',', $query_parts);
-
-
-
-*/
-   
- 
-    //  Insert row data array into your database of choice here
 }
-//echo $query;
-//mysqli_query($con,$query) or die(mysqli_error($con));
+
 }
 catch(Exception $e){echo $e->getMessage();}
 
