@@ -17,10 +17,11 @@ session_start();
 /************Result variables************/
 	$unique_id_result="";
 	$verified_status="";
+	$access_role="";
 
 
 /*****************Hitting databse*********************/
-	$check_query="select unique_id,verified from user where username='$username'";
+	$check_query="select unique_id,verified,access_role from user where username='$username'";
 	
 	$verified=mysqli_query($con,$check_query);
 
@@ -30,6 +31,7 @@ session_start();
 
 		$uniqueid_result=$row['unique_id'];
 		$verified_status=$row['verified'];
+		$access_role=$row['access_role'];
 
 		
 	}
@@ -41,6 +43,7 @@ session_start();
 		if($uniqueid==$uniqueid_result){
 
 			/*************************Device is same********************/
+			$_SESSION['role']=$access_role;
 				echo "success12";
 			}
 

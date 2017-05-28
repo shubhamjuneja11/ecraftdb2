@@ -1,8 +1,11 @@
 <?php include 'PHPExcel/Classes/PHPExcel/IOFactory.php';
 
 
-$con=mysqli_connect("localhost","root","secretpass","ecraftindia") or die(mysql_error());
-
+require_once 'include/DB_Connect.php' ;
+    
+    /*********DB Connection************/
+    $db=new DB_Connect();
+    $con=$db->connect();
 
 
 
@@ -32,17 +35,12 @@ for ($row = 2; $row <=$highestRow ;$row++){
 
 
  
-//echo '$p';
-    //foreach ($rowData as $val) 
     
     foreach ($rowData as $val) {
         # code...
     
     {
-            /*for($i=0;$i<count($val);$i++){
-                echo $i."  ".$val[$i];echo '<br>';
-                $mastersku=$val[$i];
-            }*/
+        
 
             $mastersku=$val[1];
             $sku=$val[2];

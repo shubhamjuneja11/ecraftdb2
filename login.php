@@ -23,11 +23,13 @@ if(isset($_POST['username']) && isset($_POST['password'])&&isset($_POST['uniquei
 	if(mysqli_num_rows($res)>0){
 		
 		//echo 'success';
-		$_SESSION['username']=$username;
+	/*	$_SESSION['username']=$username;
 		$_SESSION['uniqueid']=$uniqueid;
 		header("Location:loginredirect.php");
 
-		exit();
+		exit();*/
+		$response=array("error"=>true);
+		echo json_encode($response);
 		
 	}
 	else echo 'no';
