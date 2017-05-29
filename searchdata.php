@@ -11,11 +11,12 @@ $con=$db->connect();
 
 if(isset($_POST['query'])){
 	$q=$_POST['query'];
+	$offset=$_POST['count'];
+	$offset=$offset*10;
+	$limit=$offset+10;
 	//echo "$q";
-	
-echo $q;
-	$query="select name,sku,cp,mrp,images from products where sku like '%{$q}%' or name like '%{$q}%'" ;
-	echo $query;
+
+	$query="select name,sku,cp,mrp,images from products where sku like '%{$q}%' or name like '%{$q}%' " ;
 	$res=mysqli_query($con,$query);
 
 	/*$res=array_map(function($r) {
@@ -25,11 +26,9 @@ echo $q;
 
 	/*$res=utf8_encode($res);*/
 	$arr["products"]=array();
-	echo "3";
 	$i=0;
 	while($row=mysqli_fetch_assoc($res)){
 
-		echo json_encode($row);
 		$product=array();
 		$product['name']=$row['name'];
 		$product['sku']=$row['sku'];
@@ -46,6 +45,4 @@ echo $q;
 
 
 }//echo mysql_error($con);
-
-else echo "fdf";
 ?>

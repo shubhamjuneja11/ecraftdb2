@@ -1,6 +1,4 @@
 <?php
-
-{
 session_start();
 
 	require_once 'include/DB_Connect.php' ;
@@ -8,17 +6,17 @@ session_start();
 	/*********DB Connection************/
 	$db=new DB_Connect();
 	$con=$db->connect();
-
+	//echo "aloo=   ".$aloo;
 
 /**********Session variables************/
 	$username=$_SESSION['username'];
 	$uniqueid=$_SESSION['uniqueid'];
+	$access_role=$_SESSION['access_role'];
 
+	//echo "abbbb".$_SESSION['username'];
 /************Result variables************/
 	$unique_id_result="";
 	$verified_status="";
-	$access_role="";
-
 
 /*****************Hitting databse*********************/
 	$check_query="select unique_id,verified,access_role from user where username='$username'";
@@ -31,7 +29,7 @@ session_start();
 
 		$uniqueid_result=$row['unique_id'];
 		$verified_status=$row['verified'];
-		$access_role=$row['access_role'];
+		
 
 		
 	}
@@ -43,28 +41,28 @@ session_start();
 		if($uniqueid==$uniqueid_result){
 
 			/*************************Device is same********************/
-			$_SESSION['role']=$access_role;
-				echo "success12";
+			
+				$res["success"]=1;
 			}
 
 
 		else{
 			/***********************Device is not same*******************/
-			echo "another device";
+			$res["success"]=-1;
 			}
 	}
 
 	else{
 		/***************************Device login first time so update its id in db***************/
-		$newlogin="update user set verified= 1,unique_id='$uniqueid' where username='$username'";
-		echo "ddd";
-		$res=mysqli_query($con,$newlogin);
-		echo json_encode($res);
-		echo "wedwd";
+		$newlogin="insert into user(username,unique_id,verified,access_role) values('$username','$uniqueid','1','$access_role')";
+		$res=mysqli_query($con,$newlogin) or die(mysqli_error($con));
+		$res["success"]=1;
+		
+	
 
 	}
 
+echo json_encode($res);
 
-}
 
 ?>
