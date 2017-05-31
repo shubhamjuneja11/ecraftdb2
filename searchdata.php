@@ -16,7 +16,7 @@ if(isset($_POST['query'])){
 	$limit=$offset+10;
 	//echo "$q";
 
-	$query="select name,sku,cp,mrp,images from products where sku like '%{$q}%' or name like '%{$q}%' " ;
+	$query="select name,sku,cp,mrp,images from products where sku like '%{$q}%' or name like '%{$q}%' limit $limit offset $offset" ;
 	$res=mysqli_query($con,$query);
 
 	/*$res=array_map(function($r) {

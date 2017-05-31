@@ -12,11 +12,11 @@ require_once 'include/DB_Connect.php';
   	$username=$_POST['username'];
   	$unique_id=$_POST['uniqueid'];
   	$offset=$_POST['count'];
-	$offset=$offset*10;
-	$limit=$offset+10;
+	$offset=$offset*20;
+	$limit=$offset+20;
 	
 
-  	$query="select access_role from user where username = '$username' and unique_id= '$unique_id'";
+  	$query="select access_role from user where username = '$username' and unique_id= '$unique_id' limit $limit offset $offset";
   
   	$res=mysqli_query($con,$query) or die(mysqli_error($con));
   
@@ -27,10 +27,10 @@ require_once 'include/DB_Connect.php';
   		$access_role=$row[0];
 
   	//now get data according to its role
-echo "string";
+
   	$query="select sku,name,cp,sp,images from products limit $limit offset $offset";
   	$res=mysqli_query($con,$query) or die(mysql_error());
-echo "string";
+
   	$response["products"]=array();
   	$response["success"]=1;
   	if(mysqli_num_rows($res)>0){
